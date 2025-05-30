@@ -1,0 +1,13 @@
+services:
+  hackaton:
+    build:
+      context: ./api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api/app:/app/app
+      - ./api/static:/app/static
+    command: >
+      uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload #本番環境では --reloadを外す
+    environment:
+      - PYTHONUNBUFFERED=1

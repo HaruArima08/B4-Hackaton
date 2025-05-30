@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+venv/
+.env
+.env.*
+
+# Uvicorn logs
+*.log
+
+# Jupyter Notebook（使う場合）
+.ipynb_checkpoints
+
+# VSCode
+.vscode/
