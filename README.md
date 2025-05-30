@@ -46,7 +46,6 @@ npm -v
 ```bash
 cd frontend
 npm install
-npm run dev
 ```
 5. 開発サーバ起動
 ```bash
