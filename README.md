@@ -48,7 +48,7 @@ cd frontend
 npm install
 ```
 
-5.API利用のためのライブラリインストール
+5. API利用のためのライブラリインストール
 ```bash
 npm install axios
 ```
