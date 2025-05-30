@@ -47,7 +47,13 @@ npm -v
 cd frontend
 npm install
 ```
-5. 開発サーバ起動
+
+5.API利用のためのライブラリインストール
+```bash
+npm install axios
+```
+
+6. 開発サーバ起動
 ```bash
 npm run dev
 ```
