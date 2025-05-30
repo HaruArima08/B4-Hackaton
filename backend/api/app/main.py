@@ -15,9 +15,9 @@ app.add_middleware(
 )
 
 # APIエンドポイント
-@app.get("/v1/health")
-async def healthcheck():
-    return {"status": "ok"}
+@app.get("/v1")
+async def check():
+    return {"status": "OK!"}
 
 # 静的ファイル（React SPA）
 static_dir = os.path.join(os.path.dirname(__file__), "../static")
