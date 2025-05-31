@@ -1,18 +1,17 @@
 from pydantic import BaseModel
+from fastapi import HTTPException
 import sqlite3
 
-dbname = 'db/user.db'
+dbname = 'api/app/db/user.db'
 
-class LoginRequest(BaseModel):
-    username: str
-    password: str
+def check_user_credentials(data: dict):
+    username = data.get("username")
+    password = data.get("password")
 
-def check_user_credentials(req: LoginRequest):
-
+    
     conn = sqlite3.connect(dbname)
     cur = conn.cursor()
-
-    cur.execute("SELECT * FROM user WHERE username=? AND password=?", (req.username, req.password))
+    cur.execute("SELECT * FROM user WHERE username=? AND password=?", (username, password))
     user = cur.fetchone() #検索結果のうち、最初の1件だけを取得
     conn.close()
 

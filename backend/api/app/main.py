@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
@@ -23,8 +23,9 @@ async def check():
 
 # login機能用エンドポイント
 @app.post("/v1/login")
-async def login(req):
-    return authenticate_user(req)
+async def login(req: Request):
+    data = await req.json()
+    return check_user_credentials(data)
 
 # 静的ファイル（React SPA）
 static_dir = os.path.join(os.path.dirname(__file__), "../static")
