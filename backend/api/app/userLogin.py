@@ -1,15 +1,20 @@
 from pydantic import BaseModel
 from fastapi import HTTPException
 import sqlite3
+import os
 
-dbname = 'api/app/db/user.db'
+base_dir = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(base_dir, "db/user.db")
 
 def check_user_credentials(data: dict):
-    username = data.get("username")
+    username = data.get("name")
     password = data.get("password")
 
-    
-    conn = sqlite3.connect(dbname)
+    print(username)
+    print(password)
+
+
+    conn = sqlite3.connect(db_path)
     cur = conn.cursor()
     cur.execute("SELECT * FROM user WHERE username=? AND password=?", (username, password))
     user = cur.fetchone() #検索結果のうち、最初の1件だけを取得

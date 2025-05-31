@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
 
-from api.app.userLogin import check_user_credentials
+from .userLogin import check_user_credentials
 
 app = FastAPI(title="FastAPI B4 Hackaton")
 
@@ -22,7 +22,7 @@ async def check():
     return {"status": "OK!"}
 
 # login機能用エンドポイント
-@app.post("/v1/login")
+@app.post("/login")
 async def login(req: Request):
     data = await req.json()
     return check_user_credentials(data)
