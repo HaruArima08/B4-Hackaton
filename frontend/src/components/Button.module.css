@@ -1,0 +1,26 @@
+.button {
+    border-radius: 8px;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+}
+
+.green {
+    background-color: #4caf50;
+    color: white;
+}
+
+.green:hover {
+    background-color: #43a047;
+}
+
+.red {
+    background: linear-gradient(to right, #ef5350, #c62828);
+    color: white;
+}
+
+.red:hover {
+    background: linear-gradient(to right, #c62828, #ef5350);
+}

@@ -1,28 +1,20 @@
 import React from 'react'
-import axios from "axios"
+// import axios from "axios"
 import './App.css'
-
-// APIレスポンスの型を定義
-type ApiResponse = {
-  status: string;
-}
+import { Routes, Route } from "react-router-dom";
+import Home from './components/pages/Home';
+import Login from './components/pages/Login';
+import { Button } from './components/Button';
 
 function App() {
-  const [data, setData] = React.useState<ApiResponse | null>(null);
-  const url = "/v1"
-
-  const GetData = () => {
-    axios.get(url).then((res) => {
-      setData(res.data);
-    });
-  };
-
   return (
-    <div>
-      <div>処理をここに書いていく</div>
-      {data ? <div>{data.status}</div> : <button onClick={GetData}>データを取得</button>}
+    <div className='App'>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
     </div>
-  )
+  );
 }
 
 export default App
