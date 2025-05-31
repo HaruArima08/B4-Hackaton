@@ -2,12 +2,13 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
+import sqlite3
 
 from .userLogin import check_user_credentials
 
 app = FastAPI(title="FastAPI B4 Hackaton")
 
-# 開発時のみCORSを許可（統合後は不要になる）
+# CORS設定（開発用）
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -16,22 +17,43 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# グローバル変数を使う場合はNoneで初期化
+conn = None
+
+# 起動時にDB接続を作成
+@app.on_event("startup")
+def startup_event():
+    global conn
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(base_dir, "db/user.db")
+    conn = sqlite3.connect(db_path)
+    # SQLiteはデフォルトでスレッドセーフではないので
+    # 複数スレッドでアクセスするなら `check_same_thread=False` をつけることも検討
+
+# シャットダウン時にDB接続を閉じる
+@app.on_event("shutdown")
+def shutdown_event():
+    global conn
+    if conn:
+        conn.close()
+
 # APIエンドポイント
 @app.get("/v1")
 async def check():
     return {"status": "OK!"}
 
-# login機能用エンドポイント
 @app.post("/login")
 async def login(req: Request):
     data = await req.json()
-    return check_user_credentials(data)
+    return check_user_credentials(data, conn)
 
-# 静的ファイル（React SPA）
+# status表示用の関数（get_user_statusの定義が必要）
+@app.post("/status")
+async def check_status():
+    return get_user_status(conn)
+
+# 静的ファイルの配信
 static_dir = os.path.join(os.path.dirname(__file__), "../static")
 app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
-
-#React Routerの履歴API
-app.mount("/", StaticFiles(directory=static_dir, html=True), name="spa")
 
 
