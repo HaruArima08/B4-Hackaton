@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
-const LoginForm: React.FC = () => {
+const Login: React.FC = () => {
     const [name, setName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const navigate = useNavigate();
     const handleLogin = async () => {
         try {
             const res = await axios.post("http://localhost:8000/login", {
@@ -13,7 +14,7 @@ const LoginForm: React.FC = () => {
             });
             localStorage.setItem("token", res.data.access_token);
             alert("ログイン成功！");
-            // Navigate("/"); //status表示に移動させる
+            navigate("/MembersStatus"); //status表示に移動させる
         } catch (err) {
             alert("ログイン失敗");
             setPassword(""); // パスワードをクリア
@@ -41,4 +42,4 @@ const LoginForm: React.FC = () => {
         </div>
     );
 };
-export default LoginForm;
+export default Login;
