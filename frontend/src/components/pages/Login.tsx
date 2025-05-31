@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { Button } from "../Button";
-const LoginForm: React.FC = () => {
+const Login: React.FC = () => {
     const [name, setName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const handleLogin = async () => {
@@ -37,8 +37,8 @@ const LoginForm: React.FC = () => {
             />
             <br />
             {/* <button onClick={handleLogin}>ログイン</button> */}
-            <Button onClck={handleLogin} variant="green">ログイン</Button>
+            <Button onClick={handleLogin} variant="green">ログイン</Button>
         </div>
     );
 };
-export default LoginForm;
+export default Login;
