@@ -14,7 +14,7 @@ type Member = {
     status: 'in' | 'out';
 };
 
-const MembersPage: React.FC = () => {
+const MembersStatus: React.FC = () => {
     const [members, setMembers] = useState<Member[]>([]);
 
     useEffect(() => {
@@ -93,4 +93,4 @@ const MembersPage: React.FC = () => {
     );
 };
 
-export default MembersPage;
+export default MembersStatus;
