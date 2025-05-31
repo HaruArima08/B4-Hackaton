@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
             />
             <br />
             {/* <button onClick={handleLogin}>ログイン</button> */}
-            <Button onClck={handleLogin} variant="green">ログイン</Button>
+            <Button onClick={handleLogin} variant="green">ログイン</Button>
         </div>
     );
 };
