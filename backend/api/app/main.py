@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
 
-from api.app.userLogin import authenticate_user
+from api.app.userLogin import check_user_credentials
 
 app = FastAPI(title="FastAPI B4 Hackaton")
 
