@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 from fastapi import HTTPException
 
 def check_user_credentials(data: dict, conn):
