@@ -21,6 +21,6 @@ def check_user_credentials(req: LoginRequest):
     else:
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
-result = check_user_credentials(LoginRequest(username="miyadai_mokun", password="miyadaimo"))
-print(result)
+# result = check_user_credentials(LoginRequest(username="miyadai_mokun", password="miyadaimo"))
+# print(result)
 
