@@ -3,16 +3,15 @@ import axios from "axios";
 import styles from "./MembersStatus.module.css";
 
 type MemberStatus = {
-    username: string; //ユーザ名
-    user_id: number; //ユーザID
-    status_id: number; //状態表示（1:在室, 2:帰宅）
+    username: string;
+    user_id: number;
+    status_id: number;
 };
 
 const statusMap: Record<number, string> = {
     1: "在室",
     2: "帰宅"
 };
-
 
 const MembersStatus: React.FC = () => {
     const [statuses, setStatuses] = useState<MemberStatus[]>([]);
@@ -40,32 +39,37 @@ const MembersStatus: React.FC = () => {
     }, [token]);
 
     if (loading) {
-        return <p>読み込み中...</p>;
+        return <p className={styles.paragraph}>読み込み中...</p>;
     }
 
     return (
-        <div>
-            <h1>メンバーのステータス一覧</h1>
+        <div className={styles.container}>
+            <h1 className={styles.heading}>メンバーのステータス一覧</h1>
             {statuses.length === 0 ? (
-                <p>登録されたステータスはありません。</p>
+                <p className={styles.paragraph}>登録されたステータスはありません。</p>
             ) : (
-                <table>
-                    <thead>
+                <table className={styles.table}>
+                    <thead className={styles.thead}>
                         <tr>
-                            <th>ユーザ名</th>
-                            {/*<th>ユーザID</th>*/}
-                            <th>ステータス</th>
+                            <th className={styles.th}>ユーザ名</th>
+                            <th className={styles.th}>ステータス</th>
                         </tr>
                     </thead>
                     <tbody>
                         {statuses.map((status, index) => (
-                            <tr key={index}>
-                                <td>{status.username}</td>
-                                {/*<td>{status.user_id}</td>*/}
-                                <td><span
-                                    className={`${styles.statusBadge} ${styles[`status${status.status_id}`] || styles.statusUnknown
-                                        }`}
-                                >{statusMap[status.status_id] || "不明"}</span></td>
+                            <tr
+                                key={index}
+                                className={`${index % 2 === 0 ? styles.evenRow : ""} ${styles.hoverRow}`}
+                            >
+                                <td className={styles.td}>{status.username}</td>
+                                <td className={styles.td}>
+                                    <span
+                                        className={`${styles.statusBadge} ${styles[`status${status.status_id}`] || styles.statusUnknown
+                                            }`}
+                                    >
+                                        {statusMap[status.status_id] || "不明"}
+                                    </span>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
