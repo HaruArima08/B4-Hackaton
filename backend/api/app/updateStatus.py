@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 
-def update_user_status(data: dict, conn):
+def register_user_status(data: dict, conn):
     user_id = data.get("user_id")
     status_id = data.get("status_id")
 
