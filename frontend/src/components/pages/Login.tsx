@@ -21,7 +21,6 @@ const Login: React.FC<Props> = ({ onLoginSuccess }) => {
                 password,
             });
             localStorage.setItem("token", res.data.access_token);
-            alert("ログイン成功！");
             onLoginSuccess();       // App の state を true に切り替え
             navigate("/"); //トップページに移動させる
         } catch (err) {
