@@ -6,7 +6,7 @@ import sqlite3
 
 from .userLogin import check_user_credentials
 from .getStatus import get_user_status
-from .updateStatus import update_user_status
+from .updateStatus import register_user_status
 
 app = FastAPI(title="FastAPI B4 Hackaton")
 
@@ -56,10 +56,10 @@ async def check_status():
     return get_user_status(conn)
 
 # status更新用の関数
-@app.post("/status/updateStatus")
+@app.post("/status/register")
 async def update_status(req: Request):
     data = await req.json()
-    return update_user_status(data,conn)
+    return register_user_status(data,conn)
 
 # 静的ファイルの配信
 static_dir = os.path.join(os.path.dirname(__file__), "../static")
