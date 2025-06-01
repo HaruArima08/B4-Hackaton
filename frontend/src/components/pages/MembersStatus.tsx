@@ -4,8 +4,14 @@ import axios from "axios";
 type MemberStatus = {
     username: string; //ユーザ名
     user_id: number; //ユーザID
-    status_id: number; //状態表示（0:在室, 1:帰宅）
+    status_id: number; //状態表示（1:在室, 2:帰宅）
 };
+
+const statusMap: Record<number, string> = {
+    1: "在室",
+    2: "帰宅"
+};
+
 
 const MembersStatus: React.FC = () => {
     const [statuses, setStatuses] = useState<MemberStatus[]>([]);
@@ -15,7 +21,7 @@ const MembersStatus: React.FC = () => {
     useEffect(() => {
         const fetchStatuses = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/status", {
+                const res = await axios.post("http://localhost:8000/status", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -55,7 +61,7 @@ const MembersStatus: React.FC = () => {
                             <tr key={index}>
                                 <td>{status.username}</td>
                                 <td>{status.user_id}</td>
-                                <td>{status.status_id === 0 ? "在室" : "帰宅"}</td>
+                                <td>{statusMap[status.status_id] || "不明"}</td>
                             </tr>
                         ))}
                     </tbody>
