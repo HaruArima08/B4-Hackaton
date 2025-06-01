@@ -5,6 +5,7 @@ import os
 import sqlite3
 
 from .userLogin import check_user_credentials
+from .getStatus import get_user_status
 
 app = FastAPI(title="FastAPI B4 Hackaton")
 
