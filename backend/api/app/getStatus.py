@@ -17,6 +17,6 @@ def get_user_status(conn):
 
     if users:
         user_dicts = [{"username": u[0], "user_id": u[1], "status_id": u[2]} for u in users]
-        return json.dumps(user_dicts, ensure_ascii=False, indent=2)
+        return user_dicts
     else:
         raise HTTPException(status_code=404, detail="No user data found")
