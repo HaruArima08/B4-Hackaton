@@ -24,7 +24,7 @@ const MembersRegister: React.FC = () => {
         }
 
         try {
-            const res = await axios.post(
+            await axios.post(
                 "http://localhost:8000/status/register", // 適切なエンドポイントに変更
                 {
                     status_id: statusId,
