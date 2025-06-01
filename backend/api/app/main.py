@@ -6,6 +6,7 @@ import sqlite3
 
 from .userLogin import check_user_credentials
 from .getStatus import get_user_status
+from .updateStatus import update_user_status
 
 app = FastAPI(title="FastAPI B4 Hackaton")
 
@@ -43,15 +44,22 @@ def shutdown_event():
 async def check():
     return {"status": "OK!"}
 
+# login用の関数
 @app.post("/login")
 async def login(req: Request):
     data = await req.json()
     return check_user_credentials(data, conn)
 
-# status表示用の関数（get_user_statusの定義が必要）
+# status表示用の関数
 @app.post("/status")
 async def check_status():
     return get_user_status(conn)
+
+# status更新用の関数
+@app.post("/status/updateStatus")
+async def update_status(req: Request):
+    data = await req.json()
+    return update_user_status(data,conn)
 
 # 静的ファイルの配信
 static_dir = os.path.join(os.path.dirname(__file__), "../static")
