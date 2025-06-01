@@ -24,7 +24,9 @@ function AnimatedText({ text, animationClass }: { text: string; animationClass: 
 }
 
 function Home() {
-    const animationClasses = ['typewriter', 'fade-in-title', 'scale-up-title', 'drop-in', 'wave'];
+    // const animationClasses = ['typewriter', 'fade-in-title', 'scale-up-title', 'drop-in', 'wave'];
+    const animationClasses = ['fade-in-title', 'scale-up-title', 'drop-in', 'wave'];
+
     const [animationClass, setAnimationClass] = useState(() => {
         // 初回ランダム選択
         return animationClasses[Math.floor(Math.random() * animationClasses.length)];
