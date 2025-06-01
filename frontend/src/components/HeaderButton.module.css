@@ -1,0 +1,30 @@
+.button {
+    /* ヘッダー用に少し小さめ、かつ縦横の余白を調整 */
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.35rem 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* 緑（通常のアクション用） */
+.green {
+    background-color: #4caf50;
+    color: white;
+}
+
+.green:hover {
+    background-color: #43a047;
+}
+
+/* 赤（別のアクション／キャンセル用など） */
+.red {
+    background-color: #f44336;
+    color: white;
+}
+
+.red:hover {
+    background-color: #e53935;
+}

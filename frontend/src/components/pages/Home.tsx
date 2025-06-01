@@ -1,9 +1,9 @@
-import '../../App.css'
+import React from 'react';
 
 function Home() {
     return (
         <div>
-            <h1>処理をここに書いていく</h1>
+            <h1>KatLab：入退室管理サービス</h1>
         </div>
     )
 }
