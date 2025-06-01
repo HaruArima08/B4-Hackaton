@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import { HeaderButton } from './HeaderButton';
 
@@ -23,7 +23,9 @@ export const Header = ({ isLoggedIn }: Props) => {
 
     return (
         <header className={styles.header}>
-            <div className={styles.logo}>KatLab: 入退室管理サービス</div>
+            <Link to="/" className={styles.logo}>
+                KatLab: 入退室管理サービス
+            </Link>
 
             <div className={styles.buttons}>
                 {isLoggedIn ? (
