@@ -1,11 +1,10 @@
-import '../../App.css'
+// import '../../App.css'
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import styles from "./MembersRegister.module.css";
 import { Button } from "../Button";
 
-
 const MembersRegister: React.FC = () => {
-    const [statusId, setStatusId] = useState<number | null>(null);
     const [userId, setUserId] = useState<number | null>(null);
 
     useEffect(() => {
@@ -18,12 +17,7 @@ const MembersRegister: React.FC = () => {
     }, []);
 
     // ステータスの送信
-    const handleSubmit = async () => {
-        if (statusId === null) {
-            alert("ステータスを選択してください");
-            return;
-        }
-
+    const handleSubmit = async (statusId: number) => {
         if (userId === null) {
             alert("ユーザーIDが見つかりません。ログインしてください。");
             return;
@@ -36,8 +30,8 @@ const MembersRegister: React.FC = () => {
                     status_id: statusId,
                     user_id: userId
                 });
-            alert("ステータスを登録しました！");
-            // navigate("/MembersStatus"); // ステータス一覧ページなどへ遷移
+            const statusLabel = statusId === 1 ? "在室" : "帰宅";
+            alert(`${statusLabel}を登録しました！`);
         } catch (err) {
             alert("ステータス登録に失敗しました");
             console.error(err);
@@ -45,33 +39,16 @@ const MembersRegister: React.FC = () => {
     };
 
     return (
-        <div>
-            <h1>ステータス登録</h1>
-            <div>
-                <label>
-                    <input
-                        type="radio"
-                        value={0}
-                        checked={statusId === 1}
-                        onChange={() => setStatusId(1)}
-                    />
+        <div className={styles.container}>
+            <div className={styles.buttonGroup}>
+                <Button onClick={() => handleSubmit(1)} variant="green" className={styles.largeButton}>
                     在室
-                </label>
-                <label style={{ marginLeft: "1rem" }}>
-                    <input
-                        type="radio"
-                        value={1}
-                        checked={statusId === 2}
-                        onChange={() => setStatusId(2)}
-                    />
+                </Button>
+                <Button onClick={() => handleSubmit(2)} variant="red" className={styles.largeButton}>
                     帰宅
-                </label>
+                </Button>
             </div>
-            <br />
-            <Button onClick={handleSubmit} variant="green">
-                ステータスを登録
-            </Button>
-        </div>
+        </div >
     );
 };
 export default MembersRegister
