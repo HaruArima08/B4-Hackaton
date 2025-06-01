@@ -6,9 +6,16 @@ import { Button } from "../Button";
 
 const MembersRegister: React.FC = () => {
     const [statusId, setStatusId] = useState<number | null>(null);
+    const [userId, setUserId] = useState<number | null>(null);
 
-    // ローカルストレージからトークンを取得
-    const token = localStorage.getItem("token");
+    useEffect(() => {
+        const storedUserId = localStorage.getItem("userId");
+        if (storedUserId) {
+            setUserId(Number(storedUserId));
+        } else {
+            alert("ユーザー情報が見つかりません");
+        }
+    }, []);
 
     // ステータスの送信
     const handleSubmit = async () => {
@@ -17,18 +24,18 @@ const MembersRegister: React.FC = () => {
             return;
         }
 
+        if (userId === null) {
+            alert("ユーザーIDが見つかりません。ログインしてください。");
+            return;
+        }
+
         try {
             const res = await axios.post(
                 "http://localhost:8000/status/register", // 適切なエンドポイントに変更
                 {
                     status_id: statusId,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+                    user_id: userId
+                });
             alert("ステータスを登録しました！");
             // navigate("/MembersStatus"); // ステータス一覧ページなどへ遷移
         } catch (err) {
@@ -45,8 +52,8 @@ const MembersRegister: React.FC = () => {
                     <input
                         type="radio"
                         value={0}
-                        checked={statusId === 0}
-                        onChange={() => setStatusId(0)}
+                        checked={statusId === 1}
+                        onChange={() => setStatusId(1)}
                     />
                     在室
                 </label>
@@ -54,8 +61,8 @@ const MembersRegister: React.FC = () => {
                     <input
                         type="radio"
                         value={1}
-                        checked={statusId === 1}
-                        onChange={() => setStatusId(1)}
+                        checked={statusId === 2}
+                        onChange={() => setStatusId(2)}
                     />
                     帰宅
                 </label>

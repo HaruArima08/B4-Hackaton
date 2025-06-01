@@ -20,7 +20,14 @@ const Login: React.FC<Props> = ({ onLoginSuccess }) => {
                 name,
                 password,
             });
-            localStorage.setItem("token", res.data.access_token);
+
+            const userId = res.data.user_id;
+            if (userId) {
+                localStorage.setItem("userId", String(userId));
+            } else {
+                alert("ユーザーIDの取得に失敗しました");
+                return;
+            }
             onLoginSuccess();       // App の state を true に切り替え
             navigate("/"); //トップページに移動させる
         } catch (err) {
