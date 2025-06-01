@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import styles from "./MembersStatus.module.css";
 
 type MemberStatus = {
     username: string; //ユーザ名
@@ -52,7 +53,7 @@ const MembersStatus: React.FC = () => {
                     <thead>
                         <tr>
                             <th>ユーザ名</th>
-                            <th>ユーザID</th>
+                            {/*<th>ユーザID</th>*/}
                             <th>ステータス</th>
                         </tr>
                     </thead>
@@ -60,8 +61,11 @@ const MembersStatus: React.FC = () => {
                         {statuses.map((status, index) => (
                             <tr key={index}>
                                 <td>{status.username}</td>
-                                <td>{status.user_id}</td>
-                                <td>{statusMap[status.status_id] || "不明"}</td>
+                                {/*<td>{status.user_id}</td>*/}
+                                <td><span
+                                    className={`${styles.statusBadge} ${styles[`status${status.status_id}`] || styles.statusUnknown
+                                        }`}
+                                >{statusMap[status.status_id] || "不明"}</span></td>
                             </tr>
                         ))}
                     </tbody>
