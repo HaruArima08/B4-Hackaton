@@ -9,7 +9,11 @@ def check_user_credentials(data: dict, conn):
     user = cur.fetchone() #検索結果のうち、最初の1件だけを取得
 
     if user:
-        return {"message": "Login successful"}
+        return {
+            "message": "Login successful",
+            "user_id": user[0],
+            "username": user[1]
+        }
     else:
         raise HTTPException(status_code=401, detail="Invalid credentials")
 
